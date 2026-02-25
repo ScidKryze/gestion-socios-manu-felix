@@ -5,10 +5,8 @@ import { useRouter } from 'next/navigation'
 import Link from 'next/link'
 import { supabase } from '@/lib/supabaseClient'
 import AuthLayout from '@/app/components/AuthLayout'
-import Escudo from '@/app/components/Escudo'
 import { getCurrentSeason, inputStyle, onInputFocus, onInputBlur } from '@/lib/authHelpers'
 
-// Iconos
 function IconUser() {
   return (
     <svg className="absolute left-3.5 top-1/2 w-4 h-4 pointer-events-none" style={{ transform: 'translateY(-50%)', color: '#CBCBCB' }}
@@ -48,8 +46,8 @@ function IconLock() {
 
 const headerPattern = {
   backgroundImage: `
-    repeating-linear-gradient(45deg, rgba(255,255,255,0.04) 0px, rgba(255,255,255,0.04) 1px, transparent 1px, transparent 18px),
-    repeating-linear-gradient(-45deg, rgba(255,255,255,0.04) 0px, rgba(255,255,255,0.04) 1px, transparent 1px, transparent 18px)
+    repeating-linear-gradient(45deg, rgba(200,16,46,0.08) 0px, rgba(200,16,46,0.08) 1px, transparent 1px, transparent 18px),
+    repeating-linear-gradient(-45deg, rgba(200,16,46,0.08) 0px, rgba(200,16,46,0.08) 1px, transparent 1px, transparent 18px)
   `
 }
 
@@ -119,7 +117,6 @@ export default function RegistroPage() {
     }
   }
 
-  // Campo de formulario reutilizable
   const Field = ({
     id, label, type = 'text', placeholder, icon, delay, errorKey
   }: {
@@ -176,13 +173,32 @@ export default function RegistroPage() {
           animation: 'entrada 0.85s cubic-bezier(0.16, 1, 0.3, 1) both'
         }}>
 
-        {/* HEADER ROJO */}
+        {/* HEADER NEGRO */}
         <div className="px-10 py-10 text-center relative overflow-hidden"
-          style={{ background: 'linear-gradient(170deg, #8B0A1E 0%, #C8102E 100%)' }}>
+          style={{ background: 'linear-gradient(170deg, #0a0a0a 0%, #1a1a1a 100%)' }}>
           <div className="absolute inset-0 pointer-events-none" style={headerPattern} />
           <div className="absolute bottom-0 left-0 right-0 h-1"
-            style={{ background: 'linear-gradient(90deg, transparent, rgba(255,255,255,0.35), transparent)' }} />
-          <Escudo />
+            style={{ background: 'linear-gradient(90deg, transparent, #C8102E, transparent)' }} />
+
+          {/* LOGO REAL DE LA PEÑA */}
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src="/penialogo.jpg"
+            alt="Logo Peña Sevillista"
+            style={{
+              width: '90px',
+              height: '90px',
+              objectFit: 'contain',
+              display: 'block',
+              margin: '0 auto 14px',
+              mixBlendMode: 'screen',
+              filter: 'brightness(1.1)',
+              animation: 'flotar 3s ease-in-out infinite alternate',
+              position: 'relative',
+              zIndex: 1,
+            }}
+          />
+
           <h1 className="relative z-10"
             style={{ fontFamily: 'Bebas Neue, sans-serif', fontSize: '30px', letterSpacing: '5px', color: 'white', textTransform: 'uppercase', lineHeight: 1, textShadow: '0 2px 8px rgba(0,0,0,0.3)' }}>
             Nueva solicitud
@@ -196,7 +212,6 @@ export default function RegistroPage() {
         {/* FORMULARIO */}
         <div className="px-10 py-9">
           <form onSubmit={handleSubmit} className="space-y-5">
-
             <Field id="nombre" label="Nombre" placeholder="Tu nombre" icon={<IconUser />} delay="0.18s" />
             <Field id="apellidos" label="Apellidos" placeholder="Tus apellidos" icon={<IconUsers />} delay="0.22s" />
             <Field id="email" label="Correo electrónico" type="email" placeholder="correo@ejemplo.com" icon={<IconMail />} delay="0.26s" />
@@ -204,7 +219,6 @@ export default function RegistroPage() {
             <Field id="password" label="Contraseña" type="password" placeholder="••••••••" icon={<IconLock />} delay="0.34s" />
             <Field id="confirmPassword" label="Confirmar contraseña" type="password" placeholder="••••••••" icon={<IconLock />} delay="0.38s" />
 
-            {/* Botón SOLICITAR ALTA */}
             <button type="submit" disabled={loading}
               className="w-full py-4 rounded-md border-none cursor-pointer transition-all mt-6"
               style={{
@@ -221,14 +235,12 @@ export default function RegistroPage() {
             </button>
           </form>
 
-          {/* Divider */}
           <div className="flex items-center gap-3 my-6" style={{ animation: 'fadeUp 0.6s 0.47s cubic-bezier(0.16, 1, 0.3, 1) both' }}>
             <div className="flex-1 h-px" style={{ background: '#E8E8E8' }} />
             <span style={{ fontSize: '10px', letterSpacing: '2px', color: '#BBBBBB', textTransform: 'uppercase', fontWeight: 600 }}>¿Ya eres socio?</span>
             <div className="flex-1 h-px" style={{ background: '#E8E8E8' }} />
           </div>
 
-          {/* Link login */}
           <div className="text-center" style={{ fontSize: '13px', color: '#999', animation: 'fadeUp 0.6s 0.52s cubic-bezier(0.16, 1, 0.3, 1) both' }}>
             ¿Ya tienes cuenta?{' '}
             <Link href="/login"
@@ -240,9 +252,8 @@ export default function RegistroPage() {
           </div>
         </div>
 
-        {/* BARRA INFERIOR */}
         <div className="text-center py-2.5"
-          style={{ background: '#8B0A1E', fontFamily: 'Bebas Neue, sans-serif', fontSize: '12px', letterSpacing: '4px', color: 'rgba(255,255,255,0.45)' }}>
+          style={{ background: '#0a0a0a', fontFamily: 'Bebas Neue, sans-serif', fontSize: '12px', letterSpacing: '4px', color: 'rgba(200,16,46,0.6)' }}>
           Temporada {getCurrentSeason()}
         </div>
       </div>

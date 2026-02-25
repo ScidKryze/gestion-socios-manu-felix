@@ -1,10 +1,4 @@
 import './globals.css'
-import { Montserrat } from 'next/font/google'
-
-const montserrat = Montserrat({
-  subsets: ['latin'],
-  weight: ['400', '600', '700', '800'],
-})
 
 export const metadata = {
   title: 'Gestión de socios',
@@ -18,7 +12,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="es">
-      <body className={`${montserrat.className} bg-[#2b0000]`}>
+      <body style={{ margin: 0, padding: 0, fontFamily: 'Barlow, sans-serif' }}>
         {children}
       </body>
     </html>
